@@ -1,0 +1,5 @@
+export const RESEARCH_DATA = [
+  { id: "RES-001", title: "Deep Learning for Crop Disease Detection Using CNN", abstract: "A CNN model for early detection of crop diseases using image classification on Philippine agricultural datasets.", authors: ["Dr. Maria Santos", "Ana Marie Reyes"], area: "Artificial Intelligence", keywords: ["CNN", "Deep Learning", "Agriculture"], year: "2023", doi: "10.1234/abc" },
+  { id: "RES-002", title: "Zero-Trust Security Model for Higher Education Institutions", abstract: "A zero-trust architecture framework for securing academic information systems in higher education.", authors: ["Dr. Lena Lim"], area: "Cybersecurity", keywords: ["Zero-Trust", "Security", "HEI"], year: "2024", doi: "10.5678/xyz" },
+  { id: "RES-003", title: "Microservices Architecture for Academic Management Systems", abstract: "Analysis of microservices patterns applied to academic management systems for improved scalability.", authors: ["Prof. Jose Garcia", "Dan Molina"], area: "Software Engineering", keywords: ["Microservices", "Architecture"], year: "2024", doi: "" },
+];

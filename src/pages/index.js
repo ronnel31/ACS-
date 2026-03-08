@@ -1,0 +1,10 @@
+export { LoginPage } from "./LoginPage.jsx";
+export { Dashboard } from "./Dashboard.jsx";
+export { StudentsPage } from "./StudentsPage.jsx";
+export { FacultyPage } from "./FacultyPage.jsx";
+export { EventsPage } from "./EventsPage.jsx";
+export { SchedulingPage } from "./SchedulingPage.jsx";
+export { ResearchPage } from "./ResearchPage.jsx";
+export { CurriculumPage } from "./CurriculumPage.jsx";
+export { SearchPage } from "./SearchPage.jsx";
+export { ReportsPage } from "./ReportsPage.jsx";
