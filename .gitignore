@@ -5,3 +5,4 @@ dist
 .env
 .env.local
 backend/node_modules
+*.sqlite
