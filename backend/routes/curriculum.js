@@ -8,9 +8,10 @@ const router = express.Router();
 // GET /api/curriculum
 router.get("/", authenticate, async (req, res) => {
   try {
-    const { status } = req.query;
+    const { program_id, is_active } = req.query;
     const where = {};
-    if (status) where.status = status;
+    if (program_id) where.program_id = parseInt(program_id);
+    if (is_active !== undefined) where.is_active = parseInt(is_active);
 
     const curricula = await Curriculum.findAll({ where });
     res.json(curricula);
@@ -37,7 +38,11 @@ router.post(
   "/",
   authenticate,
   authorize("admin"),
-  [body("program").trim().notEmpty().withMessage("Program is required")],
+  [
+    body("program_id").notEmpty().withMessage("Program ID is required"),
+    body("code").trim().notEmpty().withMessage("Curriculum code is required"),
+    body("effectivity_ay").trim().notEmpty().withMessage("Effectivity academic year is required"),
+  ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
@@ -46,6 +51,9 @@ router.post(
       const curriculum = await Curriculum.create(req.body);
       res.status(201).json(curriculum);
     } catch (err) {
+      if (err.name === "SequelizeUniqueConstraintError") {
+        return res.status(409).json({ message: "Curriculum code already exists for this program" });
+      }
       console.error(err);
       res.status(500).json({ message: "Server error" });
     }

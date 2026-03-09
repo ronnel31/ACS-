@@ -8,13 +8,14 @@ const router = express.Router();
 // GET /api/schedules
 router.get("/", authenticate, async (req, res) => {
   try {
-    const { faculty, section, semester, year } = req.query;
+    const { term_id, member_id, section, course_id, room_id } = req.query;
     const where = {};
 
-    if (faculty) where.faculty = faculty;
+    if (term_id) where.term_id = parseInt(term_id);
+    if (member_id) where.member_id = member_id;
     if (section) where.section = section;
-    if (semester) where.semester = semester;
-    if (year) where.year = year;
+    if (course_id) where.course_id = parseInt(course_id);
+    if (room_id) where.room_id = parseInt(room_id);
 
     const schedules = await Schedule.findAll({ where });
     res.json(schedules);
@@ -42,8 +43,14 @@ router.post(
   authenticate,
   authorize("admin"),
   [
-    body("courseCode").trim().notEmpty().withMessage("Course code is required"),
-    body("subject").trim().notEmpty().withMessage("Subject is required"),
+    body("term_id").notEmpty().withMessage("Term ID is required"),
+    body("member_id").trim().notEmpty().withMessage("Faculty member ID is required"),
+    body("course_id").notEmpty().withMessage("Course ID is required"),
+    body("room_id").notEmpty().withMessage("Room ID is required"),
+    body("section").trim().notEmpty().withMessage("Section is required"),
+    body("day_pattern").trim().notEmpty().withMessage("Day pattern is required"),
+    body("time_start").notEmpty().withMessage("Start time is required"),
+    body("time_end").notEmpty().withMessage("End time is required"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -53,6 +60,9 @@ router.post(
       const schedule = await Schedule.create(req.body);
       res.status(201).json(schedule);
     } catch (err) {
+      if (err.name === "SequelizeUniqueConstraintError") {
+        return res.status(409).json({ message: "Schedule conflict: room or faculty already booked for this time slot" });
+      }
       console.error(err);
       res.status(500).json({ message: "Server error" });
     }

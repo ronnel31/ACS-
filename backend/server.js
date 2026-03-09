@@ -12,6 +12,11 @@ const eventRoutes = require("./routes/events");
 const scheduleRoutes = require("./routes/schedules");
 const researchRoutes = require("./routes/research");
 const curriculumRoutes = require("./routes/curriculum");
+const academicTermRoutes = require("./routes/academic-terms");
+const departmentRoutes = require("./routes/departments");
+const programRoutes = require("./routes/programs");
+const roomRoutes = require("./routes/rooms");
+const courseRoutes = require("./routes/courses");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -48,6 +53,11 @@ app.use("/api/events", apiLimiter, eventRoutes);
 app.use("/api/schedules", apiLimiter, scheduleRoutes);
 app.use("/api/research", apiLimiter, researchRoutes);
 app.use("/api/curriculum", apiLimiter, curriculumRoutes);
+app.use("/api/academic-terms", apiLimiter, academicTermRoutes);
+app.use("/api/departments", apiLimiter, departmentRoutes);
+app.use("/api/programs", apiLimiter, programRoutes);
+app.use("/api/rooms", apiLimiter, roomRoutes);
+app.use("/api/courses", apiLimiter, courseRoutes);
 
 // ─── Health Check ─────────────────────────────────────────────────────────────
 app.get("/api/health", (req, res) => {
