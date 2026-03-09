@@ -15,7 +15,7 @@ export function LoginPage({ onLogin }) {
     if (match) {
       onLogin({ name: match.name, role: match.role });
     } else {
-      setErr("Invalid credentials. Click a demo row to auto-login.");
+      setErr("Invalid username or password.");
     }
   }
 
