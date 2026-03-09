@@ -137,6 +137,27 @@ function StudentProfileView({ student, onEdit, onBack }) {
   );
 }
 
+function FInp({ label, f, type, ph, wide, data, set }) {
+  return (
+    <div style={{ gridColumn: wide ? "1 / -1" : undefined }}>
+      <Fl>{label}</Fl>
+      <input type={type || "text"} value={data[f] || ""} onChange={(e) => set(f, e.target.value)} placeholder={ph || ""} />
+    </div>
+  );
+}
+
+function FSel({ label, f, opts, wide, data, set }) {
+  return (
+    <div style={{ gridColumn: wide ? "1 / -1" : undefined }}>
+      <Fl>{label}</Fl>
+      <select value={data[f] || ""} onChange={(e) => set(f, e.target.value)}>
+        <option value="">-- Select --</option>
+        {opts.map((o) => <option key={o} value={o}>{o}</option>)}
+      </select>
+    </div>
+  );
+}
+
 function StudentForm({ initial, onSave, onCancel }) {
   const [tab, setTab] = useState(0);
   const [data, setData] = useState(initial || {});
@@ -153,27 +174,6 @@ function StudentForm({ initial, onSave, onCancel }) {
     const r = new FileReader();
     r.onload = (ev) => { setPhoto(ev.target.result); set("photo", ev.target.result); };
     r.readAsDataURL(file);
-  }
-
-  function FInp(props) {
-    return (
-      <div style={{ gridColumn: props.wide ? "1 / -1" : undefined }}>
-        <Fl>{props.label}</Fl>
-        <input type={props.type || "text"} value={data[props.f] || ""} onChange={(e) => set(props.f, e.target.value)} placeholder={props.ph || ""} />
-      </div>
-    );
-  }
-
-  function FSel(props) {
-    return (
-      <div style={{ gridColumn: props.wide ? "1 / -1" : undefined }}>
-        <Fl>{props.label}</Fl>
-        <select value={data[props.f] || ""} onChange={(e) => set(props.f, e.target.value)}>
-          <option value="">-- Select --</option>
-          {props.opts.map((o) => <option key={o} value={o}>{o}</option>)}
-        </select>
-      </div>
-    );
   }
 
   return (
@@ -197,26 +197,26 @@ function StudentForm({ initial, onSave, onCancel }) {
           <div>
             <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.accent }}>Basic Information</div>
             <div style={G2}>
-              <FInp label="Full Name *" f="fullName" ph="e.g. Ana Marie Reyes" wide />
-              <FInp label="Student Number *" f="studentNumber" ph="e.g. 2024-10001" />
-              <FSel label="Status *" f="status" opts={["Regular", "Irregular"]} />
-              <FSel label="Sex at Birth *" f="sexAtBirth" opts={["Male", "Female"]} />
-              <FSel label="Civil Status" f="civilStatus" opts={["Single", "Married", "Widowed", "Separated"]} />
-              <FSel label="Residency" f="residency" opts={["Local", "Abroad"]} />
-              <FInp label="Nationality" f="nationality" ph="e.g. Filipino" />
-              <FInp label="Religion" f="religion" ph="e.g. Roman Catholic" />
-              <FInp label="Date of Birth *" f="dateOfBirth" type="date" />
-              <FInp label="Place of Birth" f="placeOfBirth" ph="City, Province" />
+              <FInp label="Full Name *" f="fullName" ph="e.g. Ana Marie Reyes" wide data={data} set={set} />
+              <FInp label="Student Number *" f="studentNumber" ph="e.g. 2024-10001" data={data} set={set} />
+              <FSel label="Status *" f="status" opts={["Regular", "Irregular"]} data={data} set={set} />
+              <FSel label="Sex at Birth *" f="sexAtBirth" opts={["Male", "Female"]} data={data} set={set} />
+              <FSel label="Civil Status" f="civilStatus" opts={["Single", "Married", "Widowed", "Separated"]} data={data} set={set} />
+              <FSel label="Residency" f="residency" opts={["Local", "Abroad"]} data={data} set={set} />
+              <FInp label="Nationality" f="nationality" ph="e.g. Filipino" data={data} set={set} />
+              <FInp label="Religion" f="religion" ph="e.g. Roman Catholic" data={data} set={set} />
+              <FInp label="Date of Birth *" f="dateOfBirth" type="date" data={data} set={set} />
+              <FInp label="Place of Birth" f="placeOfBirth" ph="City, Province" data={data} set={set} />
             </div>
             <div style={{ height: 16 }} />
             <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.teal }}>Contact</div>
             <div style={G2}>
-              <FInp label="Present Address" f="presentAddress" wide />
-              <FInp label="Permanent Address" f="permanentAddress" wide />
-              <FInp label="Primary Mobile *" f="primaryMobile" ph="09XX-XXX-XXXX" />
-              <FInp label="Alternate Mobile" f="alternateMobile" ph="09XX-XXX-XXXX" />
-              <FInp label="Primary Email *" f="primaryEmail" type="email" />
-              <FInp label="Alternate Email" f="alternateEmail" type="email" />
+              <FInp label="Present Address" f="presentAddress" wide data={data} set={set} />
+              <FInp label="Permanent Address" f="permanentAddress" wide data={data} set={set} />
+              <FInp label="Primary Mobile *" f="primaryMobile" ph="09XX-XXX-XXXX" data={data} set={set} />
+              <FInp label="Alternate Mobile" f="alternateMobile" ph="09XX-XXX-XXXX" data={data} set={set} />
+              <FInp label="Primary Email *" f="primaryEmail" type="email" data={data} set={set} />
+              <FInp label="Alternate Email" f="alternateEmail" type="email" data={data} set={set} />
             </div>
           </div>
         )}
@@ -224,27 +224,27 @@ function StudentForm({ initial, onSave, onCancel }) {
           <div>
             <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.accent }}>Father</div>
             <div style={G2}>
-              <FInp label="Full Name" f="fatherName" />
-              <FInp label="Occupation" f="fatherOccupation" />
-              <FInp label="Date of Birth" f="fatherDOB" type="date" />
-              <FSel label="Sex at Birth" f="fatherSex" opts={["Male", "Female"]} />
+              <FInp label="Full Name" f="fatherName" data={data} set={set} />
+              <FInp label="Occupation" f="fatherOccupation" data={data} set={set} />
+              <FInp label="Date of Birth" f="fatherDOB" type="date" data={data} set={set} />
+              <FSel label="Sex at Birth" f="fatherSex" opts={["Male", "Female"]} data={data} set={set} />
             </div>
             <div style={{ height: 14 }} />
             <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.teal }}>Mother</div>
             <div style={G2}>
-              <FInp label="Full Name" f="motherName" />
-              <FInp label="Occupation" f="motherOccupation" />
-              <FInp label="Date of Birth" f="motherDOB" type="date" />
-              <FSel label="Sex at Birth" f="motherSex" opts={["Male", "Female"]} />
+              <FInp label="Full Name" f="motherName" data={data} set={set} />
+              <FInp label="Occupation" f="motherOccupation" data={data} set={set} />
+              <FInp label="Date of Birth" f="motherDOB" type="date" data={data} set={set} />
+              <FSel label="Sex at Birth" f="motherSex" opts={["Male", "Female"]} data={data} set={set} />
             </div>
             <div style={{ height: 14 }} />
             <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.gold }}>Other</div>
             <div style={G2}>
-              <FInp label="Number of Siblings" f="siblings" type="number" />
-              <FSel label="Family Annual Income" f="familyIncome" opts={["Below P100,000", "P100,000 - P249,999", "P250,000 - P349,999", "P350,000 - P499,999", "P500,000 - P749,999", "P750,000 and above"]} />
-              <FInp label="Guardian Name" f="guardianName" />
-              <FSel label="Relation to Guardian" f="guardianRelation" opts={["Father", "Mother", "Grandparent", "Sibling", "Aunt or Uncle", "Legal Guardian", "Other"]} />
-              <FInp label="Guardian Contact" f="guardianContact" />
+              <FInp label="Number of Siblings" f="siblings" type="number" data={data} set={set} />
+              <FSel label="Family Annual Income" f="familyIncome" opts={["Below P100,000", "P100,000 - P249,999", "P250,000 - P349,999", "P350,000 - P499,999", "P500,000 - P749,999", "P750,000 and above"]} data={data} set={set} />
+              <FInp label="Guardian Name" f="guardianName" data={data} set={set} />
+              <FSel label="Relation to Guardian" f="guardianRelation" opts={["Father", "Mother", "Grandparent", "Sibling", "Aunt or Uncle", "Legal Guardian", "Other"]} data={data} set={set} />
+              <FInp label="Guardian Contact" f="guardianContact" data={data} set={set} />
             </div>
           </div>
         )}
@@ -252,10 +252,10 @@ function StudentForm({ initial, onSave, onCancel }) {
           <div>
             <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.accent }}>Educational Background</div>
             <div style={G2}>
-              <FInp label="Last School Attended" f="lastSchool" wide />
-              <FInp label="Last Year Attended" f="lastYearAttended" ph="e.g. 2020-2021" />
-              <FInp label="LRN" f="lrn" ph="12-digit LRN" />
-              <FInp label="Honors Received" f="honors" ph="e.g. With Honors" wide />
+              <FInp label="Last School Attended" f="lastSchool" wide data={data} set={set} />
+              <FInp label="Last Year Attended" f="lastYearAttended" ph="e.g. 2020-2021" data={data} set={set} />
+              <FInp label="LRN" f="lrn" ph="12-digit LRN" data={data} set={set} />
+              <FInp label="Honors Received" f="honors" ph="e.g. With Honors" wide data={data} set={set} />
             </div>
           </div>
         )}
@@ -263,11 +263,11 @@ function StudentForm({ initial, onSave, onCancel }) {
           <div>
             <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.accent }}>Enrollment Details</div>
             <div style={G2}>
-              <FSel label="College" f="college" opts={["College of Computing Studies", "College of Engineering", "College of Business"]} wide />
-              <FSel label="Program" f="program" opts={["Bachelor of Science in Information Technology", "Bachelor of Science in Computer Science"]} wide />
-              <FSel label="Curriculum" f="curriculum" opts={["BSIT 2018", "BSIT 2022", "BSCS 2024"]} />
-              <FSel label="Year Level" f="yearLevel" opts={["1st Year", "2nd Year", "3rd Year", "4th Year"]} />
-              <FInp label="Section" f="section" ph="e.g. BSIT-3A" />
+              <FSel label="College" f="college" opts={["College of Computing Studies", "College of Engineering", "College of Business"]} wide data={data} set={set} />
+              <FSel label="Program" f="program" opts={["Bachelor of Science in Information Technology", "Bachelor of Science in Computer Science"]} wide data={data} set={set} />
+              <FSel label="Curriculum" f="curriculum" opts={["BSIT 2018", "BSIT 2022", "BSCS 2024"]} data={data} set={set} />
+              <FSel label="Year Level" f="yearLevel" opts={["1st Year", "2nd Year", "3rd Year", "4th Year"]} data={data} set={set} />
+              <FInp label="Section" f="section" ph="e.g. BSIT-3A" data={data} set={set} />
             </div>
           </div>
         )}
