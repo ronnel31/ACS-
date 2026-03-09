@@ -172,6 +172,27 @@ function FacultyProfileView({ fac, onEdit, onBack }) {
   );
 }
 
+function FInp({ label, f, type, ph, wide, data, set }) {
+  return (
+    <div style={{ gridColumn: wide ? "1 / -1" : undefined }}>
+      <Fl>{label}</Fl>
+      <input type={type || "text"} value={data[f] || ""} onChange={(e) => set(f, e.target.value)} placeholder={ph || ""} />
+    </div>
+  );
+}
+
+function FSel({ label, f, opts, wide, data, set }) {
+  return (
+    <div style={{ gridColumn: wide ? "1 / -1" : undefined }}>
+      <Fl>{label}</Fl>
+      <select value={data[f] || ""} onChange={(e) => set(f, e.target.value)}>
+        <option value="">-- Select --</option>
+        {opts.map((o) => <option key={o} value={o}>{o}</option>)}
+      </select>
+    </div>
+  );
+}
+
 function FacultyForm({ initial, onSave, onCancel }) {
   const [tab, setTab] = useState(0);
   const [data, setData] = useState(initial || {});
@@ -187,21 +208,6 @@ function FacultyForm({ initial, onSave, onCancel }) {
     r.onload = (ev) => { setPhoto(ev.target.result); set("photo", ev.target.result); };
     r.readAsDataURL(file);
   };
-  const FInp = (props) => (
-    <div style={{ gridColumn: props.wide ? "1 / -1" : undefined }}>
-      <Fl>{props.label}</Fl>
-      <input type={props.type || "text"} value={data[props.f] || ""} onChange={(e) => set(props.f, e.target.value)} placeholder={props.ph || ""} />
-    </div>
-  );
-  const FSel = (props) => (
-    <div style={{ gridColumn: props.wide ? "1 / -1" : undefined }}>
-      <Fl>{props.label}</Fl>
-      <select value={data[props.f] || ""} onChange={(e) => set(props.f, e.target.value)}>
-        <option value="">-- Select --</option>
-        {props.opts.map((o) => <option key={o} value={o}>{o}</option>)}
-      </select>
-    </div>
-  );
   return (
     <div className="anim">
       <div style={{ background: C.surface, border: "1px solid " + C.border, borderRadius: 12, padding: 18, marginBottom: 14, display: "flex", gap: 14, alignItems: "flex-start", flexWrap: "wrap" }}>
@@ -222,36 +228,36 @@ function FacultyForm({ initial, onSave, onCancel }) {
         {tab === 0 && <div>
           <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.purple }}>Basic Information</div>
           <div style={G2}>
-            <FInp label="Full Name *" f="fullName" ph="e.g. Dr. Maria Santos" wide />
-            <FInp label="Employee ID *" f="employeeNumber" ph="e.g. FAC-001" />
-            <FSel label="Faculty Status *" f="facultyStatus" opts={["Full-Time", "Part-Time", "Contractual"]} />
-            <FSel label="Position *" f="position" opts={["Dean", "Department Chair", "Program Head", "Professor", "Associate Professor", "Assistant Professor", "Instructor", "Lecturer"]} />
-            <FSel label="Sex at Birth *" f="sexAtBirth" opts={["Male", "Female"]} />
-            <FSel label="Civil Status" f="civilStatus" opts={["Single", "Married", "Widowed", "Separated"]} />
-            <FInp label="Nationality" f="nationality" />
-            <FInp label="Religion" f="religion" />
-            <FInp label="Date of Birth *" f="dateOfBirth" type="date" />
-            <FInp label="Place of Birth" f="placeOfBirth" />
+            <FInp label="Full Name *" f="fullName" ph="e.g. Dr. Maria Santos" wide data={data} set={set} />
+            <FInp label="Employee ID *" f="employeeNumber" ph="e.g. FAC-001" data={data} set={set} />
+            <FSel label="Faculty Status *" f="facultyStatus" opts={["Full-Time", "Part-Time", "Contractual"]} data={data} set={set} />
+            <FSel label="Position *" f="position" opts={["Dean", "Department Chair", "Program Head", "Professor", "Associate Professor", "Assistant Professor", "Instructor", "Lecturer"]} data={data} set={set} />
+            <FSel label="Sex at Birth *" f="sexAtBirth" opts={["Male", "Female"]} data={data} set={set} />
+            <FSel label="Civil Status" f="civilStatus" opts={["Single", "Married", "Widowed", "Separated"]} data={data} set={set} />
+            <FInp label="Nationality" f="nationality" data={data} set={set} />
+            <FInp label="Religion" f="religion" data={data} set={set} />
+            <FInp label="Date of Birth *" f="dateOfBirth" type="date" data={data} set={set} />
+            <FInp label="Place of Birth" f="placeOfBirth" data={data} set={set} />
           </div>
           <div style={{ height: 14 }} />
           <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.teal }}>Contact</div>
           <div style={G2}>
-            <FInp label="Present Address" f="presentAddress" wide />
-            <FInp label="Permanent Address" f="permanentAddress" wide />
-            <FInp label="Primary Mobile *" f="primaryMobile" />
-            <FInp label="Alternate Mobile" f="alternateMobile" />
-            <FInp label="Primary Email *" f="primaryEmail" type="email" />
-            <FInp label="Alternate Email" f="alternateEmail" type="email" />
+            <FInp label="Present Address" f="presentAddress" wide data={data} set={set} />
+            <FInp label="Permanent Address" f="permanentAddress" wide data={data} set={set} />
+            <FInp label="Primary Mobile *" f="primaryMobile" data={data} set={set} />
+            <FInp label="Alternate Mobile" f="alternateMobile" data={data} set={set} />
+            <FInp label="Primary Email *" f="primaryEmail" type="email" data={data} set={set} />
+            <FInp label="Alternate Email" f="alternateEmail" type="email" data={data} set={set} />
           </div>
         </div>}
         {tab === 1 && <div>
           <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.gold }}>Employment</div>
           <div style={G2}>
-            <FSel label="College" f="college" opts={["College of Computing Studies", "College of Engineering", "College of Business"]} wide />
-            <FSel label="Department" f="department" opts={["Information Technology", "Computer Science"]} />
-            <FInp label="Employment Start Date" f="employmentStartDate" type="date" />
-            <FSel label="Employment Type" f="employmentType" opts={["Permanent", "Probationary", "Contractual"]} />
-            <FSel label="Academic Rank" f="academicRank" opts={["Instructor I", "Instructor II", "Instructor III", "Assistant Professor I", "Assistant Professor II", "Associate Professor I", "Associate Professor II", "Professor I", "Professor II"]} wide />
+            <FSel label="College" f="college" opts={["College of Computing Studies", "College of Engineering", "College of Business"]} wide data={data} set={set} />
+            <FSel label="Department" f="department" opts={["Information Technology", "Computer Science"]} data={data} set={set} />
+            <FInp label="Employment Start Date" f="employmentStartDate" type="date" data={data} set={set} />
+            <FSel label="Employment Type" f="employmentType" opts={["Permanent", "Probationary", "Contractual"]} data={data} set={set} />
+            <FSel label="Academic Rank" f="academicRank" opts={["Instructor I", "Instructor II", "Instructor III", "Assistant Professor I", "Assistant Professor II", "Associate Professor I", "Associate Professor II", "Professor I", "Professor II"]} wide data={data} set={set} />
           </div>
         </div>}
         {tab === 2 && <div>
@@ -259,10 +265,10 @@ function FacultyForm({ initial, onSave, onCancel }) {
             <div key={deg[0]}>
               <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 11, color: deg[1] === "phd" ? C.gold : C.accent }}>{deg[0]}</div>
               <div style={G2}>
-                <FInp label="Degree Title" f={deg[1] + "Degree"} />
-                <FInp label="Major" f={deg[1] + "Major"} />
-                <FInp label="University" f={deg[1] + "University"} />
-                <FInp label="Year Graduated" f={deg[1] + "Year"} />
+                <FInp label="Degree Title" f={deg[1] + "Degree"} data={data} set={set} />
+                <FInp label="Major" f={deg[1] + "Major"} data={data} set={set} />
+                <FInp label="University" f={deg[1] + "University"} data={data} set={set} />
+                <FInp label="Year Graduated" f={deg[1] + "Year"} data={data} set={set} />
               </div>
               <div style={{ height: 13 }} />
             </div>
@@ -271,10 +277,10 @@ function FacultyForm({ initial, onSave, onCancel }) {
         {tab === 3 && <div>
           <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 13, color: C.accent }}>Teaching Load</div>
           <div style={G2}>
-            <FSel label="Semester" f="semester" opts={["1st", "2nd", "Summer"]} />
-            <FInp label="Academic Year" f="academicYear" ph="e.g. 2024-2025" />
-            <FInp label="Max Teaching Load" f="maxLoad" type="number" ph="21" />
-            <FInp label="Current Teaching Load" f="currentLoad" type="number" ph="0" />
+            <FSel label="Semester" f="semester" opts={["1st", "2nd", "Summer"]} data={data} set={set} />
+            <FInp label="Academic Year" f="academicYear" ph="e.g. 2024-2025" data={data} set={set} />
+            <FInp label="Max Teaching Load" f="maxLoad" type="number" ph="21" data={data} set={set} />
+            <FInp label="Current Teaching Load" f="currentLoad" type="number" ph="0" data={data} set={set} />
           </div>
           <div style={{ height: 12 }} />
           <Fl>Subjects Handled (one per line)</Fl>
