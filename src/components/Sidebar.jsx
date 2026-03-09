@@ -10,7 +10,7 @@ export function Sidebar({ page, setPage, user, onLogout }) {
     <div style={{ width: 200, background: C.surface, borderRight: "1px solid " + C.border, display: "flex", flexDirection: "column", height: "100vh", position: "sticky", top: 0, flexShrink: 0 }}>
       <div style={{ padding: "17px 14px 13px", borderBottom: "1px solid " + C.border }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 30, height: 30, borderRadius: 8, background: "linear-gradient(135deg," + C.accent + ",#1a7ae8)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 900, color: "#fff" }}>A</div>
+          <div style={{ width: 30, height: 30, borderRadius: 8, background: "linear-gradient(135deg," + C.accent + "," + C.accent + ")", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 900, color: "#fff" }}>A</div>
           <div>
             <div style={{ fontWeight: 800, fontSize: 11, color: C.accent, letterSpacing: ".5px" }}>IT and CS APS</div>
             <div style={{ fontSize: 10, color: C.textMuted }}>Academic Profiling</div>
