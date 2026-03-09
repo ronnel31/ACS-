@@ -37,7 +37,7 @@ export function LoginPage({ onLogin }) {
         </div>
         {err && <div style={{ color: C.red, fontSize: 12, marginBottom: 12, padding: "8px 11px", background: C.red + "15", borderRadius: 7, border: "1px solid " + C.red + "30" }}>{err}</div>}
         <button className="bp" style={{ width: "100%", padding: "11px" }} onClick={() => doLogin()}>Sign In</button>
-        <div style={{ marginTop: 15, padding: 12, background: C.surfaceHi, borderRadius: 9, border: "1px solid " + C.border }}>
+        {/* <div style={{ marginTop: 15, padding: 12, background: C.surfaceHi, borderRadius: 9, border: "1px solid " + C.border }}>
           <div style={{ fontSize: 10, color: C.textMuted, fontWeight: 700, marginBottom: 6, textTransform: "uppercase", letterSpacing: ".7px" }}>Demo Accounts - Click to Login</div>
           {CREDS.map((c) => (
             <div
@@ -52,7 +52,7 @@ export function LoginPage({ onLogin }) {
               <span style={{ marginLeft: "auto", color: C.green, fontSize: 10 }}>click</span>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

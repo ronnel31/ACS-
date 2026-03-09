@@ -4,8 +4,8 @@
   padding: 0;
 }
 body {
-  background: #070b14;
-  color: #e8f0fe;
+  background: #ffffff;
+  color: #1a0a00;
   font-family: "Outfit", sans-serif;
 }
 @keyframes fadeUp {
@@ -25,18 +25,18 @@ body {
   width: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: #0d1424;
+  background: #fff7f2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1a2840;
+  background: #fdd5b5;
   border-radius: 4px;
 }
 input,
 select,
 textarea {
-  background: #111d30;
-  border: 1px solid #1a2840;
-  color: #e8f0fe;
+  background: #fff0e6;
+  border: 1px solid #fdd5b5;
+  color: #1a0a00;
   border-radius: 8px;
   padding: 8px 12px;
   font-family: "Outfit", sans-serif;
@@ -48,14 +48,14 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #3b9eff66;
+  border-color: #f9731666;
 }
 input::placeholder,
 textarea::placeholder {
-  color: #4a607a;
+  color: #b07040;
 }
 select option {
-  background: #111d30;
+  background: #fff0e6;
 }
 table {
   border-collapse: collapse;
@@ -65,20 +65,20 @@ th {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.7px;
-  color: #4a607a;
+  color: #b07040;
   padding: 10px 14px;
   text-align: left;
-  border-bottom: 1px solid #1a2840;
+  border-bottom: 1px solid #fdd5b5;
   font-weight: 700;
 }
 td {
   padding: 11px 14px;
-  border-bottom: 1px solid #1a284022;
+  border-bottom: 1px solid #fdd5b522;
   font-size: 13px;
   vertical-align: middle;
 }
 tr:hover td {
-  background: #111d3055;
+  background: #fff0e655;
 }
 tr:last-child td {
   border-bottom: none;
@@ -92,24 +92,24 @@ tr:last-child td {
   margin-bottom: 2px;
   background: transparent;
   border: 1px solid transparent;
-  color: #8899b4;
+  color: #7c4a1e;
   font-family: "Outfit", sans-serif;
   font-size: 13px;
   cursor: pointer;
   text-align: left;
 }
 .nbtn:hover {
-  color: #e8f0fe;
-  background: #ffffff08;
+  color: #1a0a00;
+  background: #f9731608;
 }
 .nbtn.on {
-  background: #3b9eff20;
-  border-color: #3b9eff33;
-  color: #3b9eff;
+  background: #f9731620;
+  border-color: #f9731633;
+  color: #f97316;
   font-weight: 600;
 }
 .bp {
-  background: linear-gradient(135deg, #3b9eff, #1a7ae8);
+  background: linear-gradient(135deg, #f97316, #ea6010);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -124,8 +124,8 @@ tr:last-child td {
 }
 .bo {
   background: transparent;
-  color: #8899b4;
-  border: 1px solid #1a2840;
+  color: #7c4a1e;
+  border: 1px solid #fdd5b5;
   border-radius: 8px;
   padding: 8px 18px;
   font-family: "Outfit", sans-serif;
@@ -133,16 +133,16 @@ tr:last-child td {
   cursor: pointer;
 }
 .bo:hover {
-  border-color: #243650;
-  color: #e8f0fe;
+  border-color: #f9bc8f;
+  color: #1a0a00;
 }
 .sm {
   padding: 5px 12px !important;
   font-size: 12px !important;
 }
 .card {
-  background: #0d1424;
-  border: 1px solid #1a2840;
+  background: #fff7f2;
+  border: 1px solid #fdd5b5;
   border-radius: 12px;
   padding: 18px;
 }
@@ -150,14 +150,14 @@ tr:last-child td {
   transition: border-color 0.15s, transform 0.15s;
 }
 .ch:hover {
-  border-color: #243650;
+  border-color: #f9bc8f;
   transform: translateY(-1px);
 }
 .tb {
   padding: 8px 15px;
   border: none;
   background: transparent;
-  color: #8899b4;
+  color: #7c4a1e;
   font-family: "Outfit", sans-serif;
   font-size: 13px;
   cursor: pointer;
@@ -166,15 +166,15 @@ tr:last-child td {
   white-space: nowrap;
 }
 .tb:hover {
-  color: #e8f0fe;
+  color: #1a0a00;
 }
 .tb.on {
-  color: #3b9eff;
-  border-bottom-color: #3b9eff;
+  color: #f97316;
+  border-bottom-color: #f97316;
 }
 .fv {
-  background: #111d30;
-  border: 1px solid #1a2840;
+  background: #fff0e6;
+  border: 1px solid #fdd5b5;
   border-radius: 8px;
   padding: 10px 13px;
 }
@@ -193,12 +193,12 @@ tr:last-child td {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000000bb;
+  background: #00000066;
   backdrop-filter: blur(4px);
 }
 .modal {
-  background: #0d1424;
-  border: 1px solid #1a2840;
+  background: #fff7f2;
+  border: 1px solid #fdd5b5;
   border-radius: 14px;
   max-width: 95vw;
   max-height: 90vh;
