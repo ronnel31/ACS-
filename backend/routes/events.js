@@ -9,15 +9,14 @@ const router = express.Router();
 // GET /api/events
 router.get("/", authenticate, async (req, res) => {
   try {
-    const { search, type, department, semester } = req.query;
+    const { search, type, academic_year } = req.query;
     const where = {};
 
     if (search) where.title = { [Op.like]: `%${search}%` };
     if (type) where.type = type;
-    if (department) where.department = department;
-    if (semester) where.semester = semester;
+    if (academic_year) where.academic_year = academic_year;
 
-    const events = await Event.findAll({ where, order: [["date", "ASC"]] });
+    const events = await Event.findAll({ where, order: [["start_at", "ASC"]] });
     res.json(events);
   } catch (err) {
     console.error(err);
@@ -44,14 +43,16 @@ router.post(
   authorize("admin", "faculty"),
   [
     body("title").trim().notEmpty().withMessage("Title is required"),
-    body("date").notEmpty().withMessage("Date is required"),
+    body("type").notEmpty().withMessage("Type is required"),
+    body("start_at").notEmpty().withMessage("Start date/time is required"),
+    body("end_at").notEmpty().withMessage("End date/time is required"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
     try {
-      const event = await Event.create(req.body);
+      const event = await Event.create({ ...req.body, created_by: req.user.id });
       res.status(201).json(event);
     } catch (err) {
       console.error(err);
