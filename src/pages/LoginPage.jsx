@@ -23,7 +23,7 @@ export function LoginPage({ onLogin }) {
     <div style={{ minHeight: "100vh", background: C.bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
       <div style={{ width: 390, background: C.surface, border: "1px solid " + C.border, borderRadius: 16, padding: 34, animation: "fadeUp .4s ease" }}>
         <div style={{ textAlign: "center", marginBottom: 24 }}>
-          <div style={{ width: 50, height: 50, borderRadius: 13, background: "linear-gradient(135deg," + C.accent + ",#1a7ae8)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, fontWeight: 900, color: "#fff", margin: "0 auto 11px" }}>A</div>
+          <div style={{ width: 50, height: 50, borderRadius: 13, background: "linear-gradient(135deg," + C.accent + "," + C.accent + ")", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, fontWeight: 900, color: "#fff", margin: "0 auto 11px" }}>A</div>
           <h1 style={{ fontSize: 19, fontWeight: 800 }}>IT and CS APS</h1>
           <p style={{ color: C.textMuted, fontSize: 12, marginTop: 3 }}>Academic Profiling and Records System</p>
         </div>
