@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { C } from "../constants/theme.js";
 import { STUDENTS } from "../constants/data/students.js";
 import { FACULTY } from "../constants/data/faculty.js";
@@ -9,7 +10,8 @@ import { StatCard } from "../components/StatCard.jsx";
 import { SHdr } from "../components/SHdr.jsx";
 import { Lbar } from "../components/Lbar.jsx";
 
-export function Dashboard({ user, setPage }) {
+export function Dashboard({ user }) {
+  const navigate = useNavigate();
   return (
     <div className="anim">
       <div style={{ background: "linear-gradient(135deg," + C.accent + "22," + C.purple + "18)", border: "1px solid " + C.border, borderRadius: 13, padding: "18px 22px", marginBottom: 18 }}>
@@ -20,8 +22,8 @@ export function Dashboard({ user, setPage }) {
           </div>
           {user.role === "admin" && (
             <div style={{ display: "flex", gap: 7 }}>
-              <button className="bp sm" onClick={() => setPage("students")}>Manage Students</button>
-              <button className="bo sm" onClick={() => setPage("reports")}>Reports</button>
+              <button className="bp sm" onClick={() => navigate("/students")}>Manage Students</button>
+              <button className="bo sm" onClick={() => navigate("/reports")}>Reports</button>
             </div>
           )}
         </div>
@@ -34,7 +36,7 @@ export function Dashboard({ user, setPage }) {
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
         <div className="card">
-          <SHdr title="Recent Students" action={<button className="bo sm" onClick={() => setPage("students")}>View All</button>} />
+          <SHdr title="Recent Students" action={<button className="bo sm" onClick={() => navigate("/students")}>View All</button>} />
           {STUDENTS.map((s) => (
             <div key={s.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 0", borderBottom: "1px solid " + C.border + "33" }}>
               <Av name={s.fullName} size={28} color={s.course === "BSIT" ? C.accent : C.purple} />
@@ -47,7 +49,7 @@ export function Dashboard({ user, setPage }) {
           ))}
         </div>
         <div className="card">
-          <SHdr title="Faculty Teaching Load" action={<button className="bo sm" onClick={() => setPage("faculty")}>View All</button>} />
+          <SHdr title="Faculty Teaching Load" action={<button className="bo sm" onClick={() => navigate("/faculty")}>View All</button>} />
           {FACULTY.map((f) => (
             <div key={f.id} style={{ padding: "9px 0", borderBottom: "1px solid " + C.border + "33" }}>
               <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 7 }}>
