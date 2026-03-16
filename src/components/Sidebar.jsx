@@ -1,10 +1,24 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { C } from "../constants/theme.js";
 import { NAV_ITEMS } from "../constants/auth.js";
 import { ALLOWED } from "../constants/auth.js";
 import { Av } from "./Av.jsx";
 
-export function Sidebar({ page, setPage, user, onLogout }) {
+/**
+ * Application sidebar.
+ *
+ * Navigation is built with React Router's `NavLink` component.  NavLink
+ * automatically adds an `aria-current="page"` attribute and lets us apply
+ * an active style via its `className` callback — no manual page-state
+ * tracking required.  This also means that the browser's back/forward
+ * buttons and direct URL access work correctly out of the box.
+ *
+ * Rendered nav items are filtered by the user's role using the `ALLOWED`
+ * map, so students, faculty, and admins each see only the sections they
+ * are permitted to access.
+ */
+export function Sidebar({ user, onLogout }) {
   const items = NAV_ITEMS.filter((n) => ALLOWED[user.role].includes(n.id));
   return (
     <div style={{ width: 200, background: C.surface, borderRight: "1px solid " + C.border, display: "flex", flexDirection: "column", height: "100vh", position: "sticky", top: 0, flexShrink: 0 }}>
@@ -19,9 +33,13 @@ export function Sidebar({ page, setPage, user, onLogout }) {
       </div>
       <nav style={{ flex: 1, padding: "8px 8px", overflowY: "auto" }}>
         {items.map((item) => (
-          <button key={item.id} className={"nbtn" + (page === item.id ? " on" : "")} onClick={() => setPage(item.id)}>
+          <NavLink
+            key={item.id}
+            to={`/${item.id}`}
+            className={({ isActive }) => "nbtn" + (isActive ? " on" : "")}
+          >
             {item.lbl}
-          </button>
+          </NavLink>
         ))}
       </nav>
       <div style={{ padding: "12px", borderTop: "1px solid " + C.border }}>

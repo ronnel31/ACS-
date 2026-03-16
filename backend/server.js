@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const sequelize = require("./config/database");
 
@@ -41,6 +42,10 @@ const apiLimiter = rateLimit({
 });
 
 // ─── Middleware ────────────────────────────────────────────────────────────────
+// helmet sets security-related HTTP response headers (X-Content-Type-Options,
+// X-Frame-Options, Strict-Transport-Security, etc.) with safe defaults,
+// protecting the API from common web vulnerabilities without any extra config.
+app.use(helmet());
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:5173" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
